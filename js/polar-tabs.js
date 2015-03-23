@@ -19,15 +19,36 @@ Columns = function(){
         //console.log("Inside order columns");
         //console.log(this.columnArray);
         for (i = 0; i < this.columnArray.length; i++) { 
-            //console.log("columns[active_num]");
-            //console.log(columns[active_num]);
-            // this will return the order the column has
-        	console.log(this.columnArray[i]['title']);
-            var current_column_order = this.columnArray[i][active_num];
+        	var tab_num = 'tab_' + String(active_num);
+        	//console.log("tab_num");
+            //console.log(tab_num);
+            //console.log("this.columnArray[i]['position'][tab_num]");
+        	//console.log(this.columnArray[i]['position'][tab_num]);
+        	//console.log(this.columnArray[i]['title']);
+        	//console.log(this.columnArray[i]['image']);
+        	//console.log(this.columnArray[i]['text']);
+            var current_column_order = this.columnArray[i]['position'][tab_num];
+            current_column_order = current_column_order + 1;
             //console.log("current_column_order");
             //console.log(current_column_order);
-            var column_num = '.column-' + String(active_num);
-            jQuery(column_num).text(this.columnArray[active_num].text);
+            var tab_pane = 'div#tab-' + String(active_num) + '-container';
+            var column_num = ' div.column-' + String(current_column_order);
+            var exp = String(tab_pane + column_num);
+            //console.log(exp);//.jQuery(column_num)
+            var ct = " div.column-title";
+            var cp = " div.column-pic";
+            var cc = " div.column-content";
+            jQuery(exp + ct).text(this.columnArray[i]['title']);
+            jQuery(exp + cp).text(this.columnArray[i]['image']);
+            jQuery(exp + cc).text(this.columnArray[i]['text']);
+            //console.log(exp + ct);
+            //console.log(exp + cp);
+            //console.log(exp + cc);
+            //jQuery().text();
+            //.column column-1column-titlecolumn-piccolumn-content
+            //jQuery(column_num).text(this.columnArray[active_num].text);
+            //jQuery(column_num).text(this.columnArray[active_num].text);
+            //jQuery(column_num).text(this.columnArray[active_num].text);
             //this.columnArray[i]
         }
 
