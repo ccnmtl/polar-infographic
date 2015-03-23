@@ -1,59 +1,135 @@
-jQuery(document).ready(function() {  
+Columns = function(){
+    this.init = function(){
+        
+    };
 
-	var Column = function (tab_one, tab_two, tab_three, tab_four, title, pic, content){
-	    this.tab_1 = tab_one;
-	    this.tab_2 = tab_two;
-	    this.tab_3 = tab_three;
-	    this.tab_4 = tab_four;
-	    this.title = title;
-	    this.pic = pic;
-	    this.content = content;
-	};
-	
-    var columns = []
+    this.makeColumn = function(tab_one, tab_two, tab_three, tab_four, title, pic, content){
+        this.columnObject.tab_1 = tab_one;
+        this.columnObject.tab_2 = tab_two;
+        this.columnObject.tab_3 = tab_three;
+        this.columnObject.tab_4 = tab_four;
+        this.columnObject.title = title;
+        this.columnObject.pic = pic;
+        this.columnObject.content = content;
+    };
 
-    col_1 = new Column(0, 0, 0, 0, 'Column Title 1', 'path/to/pic', 'Column Body/Info Here');
-    col_2 = new Column(1, 1, 1, 1, 'Column Title 2', 'path/to/pic', 'Column Body/Info Here');
-    col_3 = new Column(2, 2, 2, 2, 'Column Title 3', 'path/to/pic', 'Column Body/Info Here');
-    col_4 = new Column(3, 3, 3, 3, 'Column Title 4', 'path/to/pic', 'Column Body/Info Here');
-    col_5 = new Column(4, 4, 4, 4, 'Column Title 5', 'path/to/pic', 'Column Body/Info Here');
-    col_6 = new Column(5, 5, 5, 5, 'Column Title 6', 'path/to/pic', 'Column Body/Info Here');
-    col_7 = new Column(6, 6, 6, 6, 'Column Title 7', 'path/to/pic', 'Column Body/Info Here');
-    col_8 = new Column(7, 7, 7, 7, 'Column Title 8', 'path/to/pic', 'Column Body/Info Here');
-    columns.push(col_1);  //columns[{}] + "<br>";
-    columns.push(col_2);
-    columns.push(col_3);
-    columns.push(col_4);
-    columns.push(col_5);
-    columns.push(col_6);
-    columns.push(col_7);
-    columns.push(col_8);
-
-    //console.log(columns);
-
-    function reorderColumns(active_tab, active_num){
-    	console.log("Inside order columns");
-        for (i = 0; i < columns.length; i++) { 
-        	console.log("columns[active_num]");
-        	console.log(columns[active_num]);
-        	// this will return the order the column has
-        	var current_column_order = columns[active_num];
-        	console.log("current_column_order");
-        	console.log(current_column_order);
-        	//var column_num = '.column-' + String(active_num);
-        	//jQuery(active_tab).jQuery(column_num).innerHTML(columns[active_num]);
-            //columns[i]
+    this.reorderColumns = function(active_tab, active_num){
+        //console.log("Inside order columns");
+        //console.log(this.columnArray);
+        for (i = 0; i < this.columnArray.length; i++) { 
+            //console.log("columns[active_num]");
+            //console.log(columns[active_num]);
+            // this will return the order the column has
+            var current_column_order = this.columnArray[active_num];
+            //console.log("current_column_order");
+            //console.log(current_column_order);
+            var column_num = '.column-' + String(active_num);
+            jQuery(column_num).text(this.columnArray[active_num].text);
+            //this.columnArray[i]
         }
 
-    }
-	//for (i = 0; i < 7; i++) { 
+    };
+
+    this.columnArray = [
+            { 
+                position: {
+                    tab_1: 0, 
+                    tab_2: 0,
+                    tab_3: 0,
+                    tab_4: 0,
+                },
+                title: 'Column Title 1',
+                image:'path/to/pic',
+                text: 'Column Body/Info Here'
+            },
+            { 
+                position: {
+                    tab_1: 1, 
+                    tab_2: 1,
+                    tab_3: 1,
+                    tab_4: 1,
+                },
+                title: 'Column Title 2',
+                image:'path/to/pic',
+                text: 'Column Body/Info Here'
+            },
+            { 
+                position: {
+                    tab_1: 2, 
+                    tab_2: 2,
+                    tab_3: 2,
+                    tab_4: 2,
+                },
+                title: 'Column Title 3',
+                image:'path/to/pic',
+                text: 'Column Body/Info Here'
+            },
+            { 
+                position: {
+                    tab_1: 3, 
+                    tab_2: 3,
+                    tab_3: 3,
+                    tab_4: 3,
+                },
+                title: 'Column Title 4',
+                image:'path/to/pic',
+                text: 'Column Body/Info Here'
+            },
+            { 
+                position: {
+                    tab_1: 4, 
+                    tab_2: 4,
+                    tab_3: 4,
+                    tab_4: 4,
+                },
+                title: 'Column Title 5',
+                image:'path/to/pic',
+                text: 'Column Body/Info Here'
+            },
+            { 
+                position: {
+                    tab_1: 5, 
+                    tab_2: 5,
+                    tab_3: 5,
+                    tab_4: 5,
+                },
+                title: 'Column Title 6',
+                image:'path/to/pic',
+                text: 'Column Body/Info Here'
+            },
+            { 
+                position: {
+                    tab_1: 6, 
+                    tab_2: 6,
+                    tab_3: 6,
+                    tab_4: 6,
+                },
+                title: 'Column Title 7',
+                image:'path/to/pic',
+                text: 'Column Body/Info Here'
+            },
+            { 
+                position: {
+                    tab_1: 7, 
+                    tab_2: 7,
+                    tab_3: 7,
+                    tab_4: 7,
+                },
+                title: 'Column Title 8',
+                image:'path/to/pic',
+                text: 'Column Body/Info Here'
+            }
+    ];
+    
+}//end Columns
+jQuery(document).ready(function() {  
+    //for (i = 0; i < 7; i++) { 
     //
     //}
     //window.setInterval(reorderColumns(), 5000);
     var counter = 1;
-    jQuery('#rotate-active-tab').on('click', function(evt){
 
-
+    jQuery('#rotate-active-tab').on('click', function(evt){ 
         var current_tab = jQuery('.nav-tabs .active');
         var current_tab_num = jQuery('.nav-tabs .active').data().tabNum;
 
@@ -67,9 +143,8 @@ jQuery(document).ready(function() {
         jQuery(next_tab_class).toggleClass("active");
         jQuery(current_tab).toggleClass("active");
         // passing currenly active class to reorder columns function
-        reorderColumns(next_tab_class, next_tab_num);
+        var polarColumns = new Columns();
+        polarColumns.reorderColumns(next_tab_class, next_tab_num);
 
     });//reorderColumns());
-
-
 });
