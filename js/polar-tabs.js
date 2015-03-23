@@ -14,42 +14,21 @@ Columns = function(){
     };
 
     this.reorderColumns = function(active_tab, active_num){
-    	console.log(active_tab);
-        console.log(active_num);
-        //console.log("Inside order columns");
-        //console.log(this.columnArray);
+
         for (i = 0; i < this.columnArray.length; i++) { 
         	var tab_num = 'tab_' + String(active_num);
-        	//console.log("tab_num");
-            //console.log(tab_num);
-            //console.log("this.columnArray[i]['position'][tab_num]");
-        	//console.log(this.columnArray[i]['position'][tab_num]);
-        	//console.log(this.columnArray[i]['title']);
-        	//console.log(this.columnArray[i]['image']);
-        	//console.log(this.columnArray[i]['text']);
-            var current_column_order = this.columnArray[i]['position'][tab_num];
+        	var current_column_order = this.columnArray[i]['position'][tab_num];
             current_column_order = current_column_order + 1;
-            //console.log("current_column_order");
-            //console.log(current_column_order);
             var tab_pane = 'div#tab-' + String(active_num) + '-container';
             var column_num = ' div.column-' + String(current_column_order);
             var exp = String(tab_pane + column_num);
-            //console.log(exp);//.jQuery(column_num)
             var ct = " div.column-title";
             var cp = " div.column-pic";
             var cc = " div.column-content";
             jQuery(exp + ct).text(this.columnArray[i]['title']);
             jQuery(exp + cp).text(this.columnArray[i]['image']);
             jQuery(exp + cc).text(this.columnArray[i]['text']);
-            //console.log(exp + ct);
-            //console.log(exp + cp);
-            //console.log(exp + cc);
-            //jQuery().text();
-            //.column column-1column-titlecolumn-piccolumn-content
-            //jQuery(column_num).text(this.columnArray[active_num].text);
-            //jQuery(column_num).text(this.columnArray[active_num].text);
-            //jQuery(column_num).text(this.columnArray[active_num].text);
-            //this.columnArray[i]
+
         }
 
     };
@@ -157,20 +136,22 @@ jQuery(document).ready(function() {
     jQuery('#rotate-active-tab').on('click', function(evt){ 
         var current_tab = jQuery('.nav-tabs .active');
         var current_tab_num = jQuery('.nav-tabs .active').data().tabNum;
+        var current_pane = ".tab-" + String(current_tab_num) + "-pane";
 
         var next_tab_num = parseInt(current_tab_num) + 1;
         if (next_tab_num === 5)
         {
             next_tab_num = 1;
         }
-
-        var next_tab_class = ".tab-" + String(next_tab_num);
-        jQuery(next_tab_class).toggleClass("active");
-        jQuery(current_tab).toggleClass("active");
         
+        var next_tab = ".tab-" + String(next_tab_num);
+        var next_pane = ".tab-" + String(next_tab_num) + "-pane";
         // passing currenly active class to reorder columns function
         var polarColumns = new Columns();
-        polarColumns.reorderColumns(next_tab_class, next_tab_num);
-
+        polarColumns.reorderColumns(next_tab, next_tab_num);
+        jQuery(current_tab).toggleClass("active");
+        jQuery(current_pane).toggleClass("active");
+        jQuery(next_tab).toggleClass("active");
+        jQuery(next_pane).toggleClass("active");
     });//reorderColumns());
 });
