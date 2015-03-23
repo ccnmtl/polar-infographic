@@ -14,13 +14,16 @@ Columns = function(){
     };
 
     this.reorderColumns = function(active_tab, active_num){
+    	console.log(active_tab);
+        console.log(active_num);
         //console.log("Inside order columns");
         //console.log(this.columnArray);
         for (i = 0; i < this.columnArray.length; i++) { 
             //console.log("columns[active_num]");
             //console.log(columns[active_num]);
             // this will return the order the column has
-            var current_column_order = this.columnArray[active_num];
+        	console.log(this.columnArray[i]['title']);
+            var current_column_order = this.columnArray[i][active_num];
             //console.log("current_column_order");
             //console.log(current_column_order);
             var column_num = '.column-' + String(active_num);
@@ -122,6 +125,7 @@ Columns = function(){
     ];
     
 }//end Columns
+
 jQuery(document).ready(function() {  
     //for (i = 0; i < 7; i++) { 
     //
@@ -142,6 +146,7 @@ jQuery(document).ready(function() {
         var next_tab_class = ".tab-" + String(next_tab_num);
         jQuery(next_tab_class).toggleClass("active");
         jQuery(current_tab).toggleClass("active");
+        
         // passing currenly active class to reorder columns function
         var polarColumns = new Columns();
         polarColumns.reorderColumns(next_tab_class, next_tab_num);
