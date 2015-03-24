@@ -124,31 +124,52 @@ Columns = function(){
             }
     ];
     
+    
+    this.addColumn = function(tab_one, tab_two, tab_three, tab_four, new_title, pic, content){
+        this.columnArray.push({ position: {tab_1: tab_one, tab_2: tab_two, tab_3: tab_three, tab_4: tab_four}, title: new_title, image: pic, text: content});
+    };
 }//end Columns
 
 jQuery(document).ready(function() {
     var initColumn = new Columns();
     initColumn.reorderColumns(0,1);
-
+    //initColumn.columnArray = [];
+    //console.log("initColumn.columnArray");
+    //console.log(initColumn.columnArray);
+    
     url = 'https://spreadsheets.google.com/feeds/list/1rqeGy7IU7wHK5QPUzanPXr85VGwPVwa2-kmUh2is43o/od6/public/values?alt=json';
     jQuery.getJSON(url, function(data) {
       //we will end up hardcoding the colum names into the code
-      //console.log(data.feed.entry[0]['gsx$title']['$t']);
-      console.log(data.feed.entry[0]['gsx$projectname1']);
+      //console.log(data.feed.entry);
+      //console.log(data.feed.entry[0]);//descriptions of projects
+      //console.log(data.feed.entry[1]);//path to image for projects
+      //console.log(data.feed.entry[2]); //1 (Tab-1?)
+      //console.log(data.feed.entry[3]); //1 (Tab-2?)
+      //console.log(data.feed.entry[4]); //1 (Tab-3?)
+      //console.log(data.feed.entry[5]); //1 (Tab-4?)
+      //console.log(data.feed.entry[0]['gsx$projectname2']);
+      //console.log(data.feed.entry[0]['gsx$projectname3']);
+      //console.log("data.feed.entry[0]['gsx$projectname1']");
+      //console.log(data.feed.entry[0]['gsx$projectname1']);
+      for (i = 0; i < 7; i++) { 
+    	  var proj_name = 'gsx$projectname' + String( i + 1 );
+    	  //console.log("proj_name");
+    	  //console.log(proj_name);
+    	  initColumn.addColumn(data.feed.entry[2][proj_name], data.feed.entry[3][proj_name], data.feed.entry[4][proj_name], data.feed.entry[5][proj_name], data.feed.entry[0][proj_name], data.feed.entry[1][proj_name], data.feed.entry[0][proj_name]);
+    	  //initColumn.columnArray.push(data.feed.entry[0][proj_name]);
+    	  //console.log("data.feed.entry[0][proj_name]");
+    	  //console.log(data.feed.entry[0][proj_name]);
+      }
     });
+    console.log("initColumn.columnArray");
+    console.log(initColumn.columnArray);
 
-    //for (i = 0; i < 7; i++) { 
-    //
-    //}
-    //window.setInterval(reorderColumns(), 5000);
-    var counter = 1;
-
-    jQuery('#rotate-active-tab').on('click', function(evt){ 
+      window.setInterval(function() {
         var current_tab = jQuery('.nav-tabs .active');
         var current_tab_num = jQuery('.nav-tabs .active').data().tabNum;
         var current_pane = ".tab-" + String(current_tab_num) + "-pane";
-
         var next_tab_num = parseInt(current_tab_num) + 1;
+
         if (next_tab_num === 5)
         {
             next_tab_num = 1;
@@ -156,12 +177,12 @@ jQuery(document).ready(function() {
         
         var next_tab = ".tab-" + String(next_tab_num);
         var next_pane = ".tab-" + String(next_tab_num) + "-pane";
-        // passing currently active class to reorder columns function
-        var polarColumns = new Columns();
-        polarColumns.reorderColumns(next_tab, next_tab_num);
+        
+        initColumn.reorderColumns(next_tab, next_tab_num);
         jQuery(current_tab).toggleClass("active");
         jQuery(current_pane).toggleClass("active");
         jQuery(next_tab).toggleClass("active");
         jQuery(next_pane).toggleClass("active");
-    });//reorderColumns());
+      	
+      }, 2000);
 });
