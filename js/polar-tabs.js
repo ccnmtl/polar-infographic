@@ -1,6 +1,6 @@
 Columns = function(){
     this.init = function(){
-        
+
     };
 
     this.makeColumn = function(tab_one, tab_two, tab_three, tab_four, title, pic, content){
@@ -126,7 +126,17 @@ Columns = function(){
     
 }//end Columns
 
-jQuery(document).ready(function() {  
+jQuery(document).ready(function() {
+    var initColumn = new Columns();
+    initColumn.reorderColumns(0,1);
+
+    url = 'https://spreadsheets.google.com/feeds/list/1rqeGy7IU7wHK5QPUzanPXr85VGwPVwa2-kmUh2is43o/od6/public/values?alt=json';
+    jQuery.getJSON(url, function(data) {
+      //we will end up hardcoding the colum names into the code
+      //console.log(data.feed.entry[0]['gsx$title']['$t']);
+      console.log(data.feed.entry[0]['gsx$projectname1']);
+    });
+
     //for (i = 0; i < 7; i++) { 
     //
     //}
