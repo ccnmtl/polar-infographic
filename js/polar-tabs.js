@@ -1,12 +1,20 @@
 Columns = function(){
     this.init = function(){
+        this.getData();
+        this.startTabRotation();
+    };
 
+    this.getData = function(){
+        // remember that initColumn is a global window var. We are doing this
+        // so we can attach data to it within the scope of the .getJson call. 
+        // it ends up being the instantiated version of "this" - which is 
+        // the "class" scope of Columns.
         url = 'https://spreadsheets.google.com/feeds/list/1rqeGy7IU7wHK5QPUzanPXr85VGwPVwa2-kmUh2is43o/od6/public/values?alt=json';
         jQuery.getJSON(url, function(data) {
 
           for (i = 0; i < 7; i++) { 
               var proj_name = 'gsx$projectname' + String( i + 1 );
-              initColumn.addColumn(data.feed.entry[2][proj_name],
+              activeColumns.addColumn(data.feed.entry[2][proj_name],
                                    data.feed.entry[3][proj_name],
                                    data.feed.entry[4][proj_name],
                                    data.feed.entry[5][proj_name],
@@ -14,33 +22,33 @@ Columns = function(){
                                    data.feed.entry[1][proj_name],
                                    data.feed.entry[0][proj_name]);
           }
-        }).always(function()
-        { //;//end of data function
-
-            window.setInterval(function() {
-                var current_tab = jQuery('.nav-tabs .active');
-                var current_tab_num = jQuery('.nav-tabs .active').data().tabNum;
-                var current_pane = ".tab-" + String(current_tab_num) + "-pane";
-                var next_tab_num = parseInt(current_tab_num) + 1;
-
-                if (next_tab_num === 5)
-                {
-                    next_tab_num = 1;
-                }
-            
-                var next_tab = ".tab-" + String(next_tab_num);
-                var next_pane = ".tab-" + String(next_tab_num) + "-pane";
-            
-                initColumn.reorderColumns(next_tab, next_tab_num);
-                jQuery(current_tab).toggleClass("active");
-                jQuery(current_pane).toggleClass("active");
-                jQuery(next_tab).toggleClass("active");
-                jQuery(next_pane).toggleClass("active");
-                console.log("initColumn.columnArray");
-                console.log(JSON.stringify(initColumn.columnArray));
-          }, 2000);
-      });//end of get json always
+        })
     };
+
+    this.startTabRotation = function(){
+        window.setInterval(function() {
+            var current_tab = jQuery('.nav-tabs .active');
+            var current_tab_num = jQuery('.nav-tabs .active').data().tabNum;
+            var current_pane = ".tab-" + String(current_tab_num) + "-pane";
+            var next_tab_num = parseInt(current_tab_num) + 1;
+
+            if (next_tab_num === 5)
+            {
+                next_tab_num = 1;
+            }
+        
+            var next_tab = ".tab-" + String(next_tab_num);
+            var next_pane = ".tab-" + String(next_tab_num) + "-pane";
+        
+            activeColumns.reorderColumns(next_tab, next_tab_num);
+            jQuery(current_tab).toggleClass("active");
+            jQuery(current_pane).toggleClass("active");
+            jQuery(next_tab).toggleClass("active");
+            jQuery(next_pane).toggleClass("active");
+            //console.log("initColumn.columnArray");
+            //console.log(JSON.stringify(initColumn.columnArray));
+          }, 2000);
+    }
 
     this.makeColumn = function(tab_one, tab_two, tab_three, tab_four, title, pic, content){
         this.columnObject.tab_1 = tab_one;
@@ -92,5 +100,5 @@ Columns = function(){
 }//end Columns
 
 jQuery(document).ready(function() {
-   window.initColumn = new Columns(); 
+   window.activeColumns = new Columns(); 
 });
