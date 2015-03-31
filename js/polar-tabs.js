@@ -16,7 +16,8 @@ Columns = function(){
           }
         }).always(function()
         {
-
+            initColumn.reorderColumns(0, 1);
+            initColumn.showColumns();
             window.setInterval(function() {
                 var current_tab = jQuery('.nav-tabs .active');
                 var current_tab_num = jQuery('.nav-tabs .active').data().tabNum;
@@ -38,6 +39,10 @@ Columns = function(){
                 jQuery(next_pane).toggleClass("active");
           }, 2000);
       });//end of get json always
+    };
+
+     this.showColumns = function(){
+      jQuery('.polar-explorer.tab-content').show();
     };
 
     this.reorderColumns = function(active_tab, active_num){

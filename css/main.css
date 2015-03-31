@@ -32,3 +32,6 @@ div.column-content {
 	text-align:center;
     column-span: 1;
 }
+.polar-explorer.tab-content{
+    display: none;
+}
