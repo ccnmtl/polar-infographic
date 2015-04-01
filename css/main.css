@@ -24,15 +24,42 @@ div.tab-pane > div.pane-header > h4:nth-child(2) {
 	width: 100em;
 	-webkit-column-count: 8; /* Chrome, Safari, Opera */
 	-moz-column-count: 8; /* Firefox */
+	column-count: 8;
 	-moz-column-fill: auto; /* Firefox */
 	-webkit-column-fill: auto;
 	column-fill: auto;
-	-webkit-column-width: 10px; /* Chrome, Safari, Opera */
-    -moz-column-width: 10px; /* Firefox */
-    column-width: 10em;
+	
+	-webkit-column-width: 12em; /* Chrome, Safari, Opera */
+    -moz-column-width: 12em; /* Firefox */
+    column-width: 12em;
+    /* -webkit-column-gap: 1em;  */ /* Chrome, Safari, Opera */
+    /* -moz-column-gap: 1em;  */ /* Firefox */
+    /* column-gap: 1em; */
 }
 
-div.tab-pane > div.pane-container > div.column {
-   /*  display: inline; */
+div.column > div.column-title {
+	font-weight: bold; 
 }
 
+/* cdiv.column > div.column-pic {
+	width:10px;
+	height:10px;
+	border-radius:5px;
+	font-size:10px;
+	color:#fff;
+	line-height:100px;
+	text-align:center;
+	background:#000;
+} */
+
+/*  display: inline;} div.tab-pane > div.pane-container >  */
+div.column {
+   display: inline;
+   min-height: 300px;
+   overflow: auto;
+   /* column-span: 1; */
+}
+
+/*
+div.column-pic {display: inline;}
+div.column-content {display: inline;} */
