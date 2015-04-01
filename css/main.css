@@ -18,7 +18,7 @@ div.tab-pane > div.pane-header > h4:nth-child(2) {
 }
 
 
-/* Move on to the pane itself and the columns it contains
+/* Moving on to the pane itself and the columns it contains
  (although the pane-header divs are technically in the panes too) */
  div.tab-pane > div.pane-container {
 	width: 100em;
@@ -27,18 +27,12 @@ div.tab-pane > div.pane-header > h4:nth-child(2) {
 	-moz-column-fill: auto; /* Firefox */
 	-webkit-column-fill: auto;
 	column-fill: auto;
-}
-
-div.tab-pane > div.pane-container > div.column {
 	-webkit-column-width: 10px; /* Chrome, Safari, Opera */
     -moz-column-width: 10px; /* Firefox */
     column-width: 10em;
+}
+
+div.tab-pane > div.pane-container > div.column {
    /*  display: inline; */
 }
 
-div.column-title,
-div.column-pic,
-div.column-content {
-	-webkit-column-span: 1;
-    column-span: 1;
-}
