@@ -3,7 +3,8 @@ Columns = function(){
 
         url = 'https://spreadsheets.google.com/feeds/list/1rqeGy7IU7wHK5QPUzanPXr85VGwPVwa2-kmUh2is43o/od6/public/values?alt=json';
         jQuery.getJSON(url, function(data) {
-
+          console.log('data.feed.entry');
+          console.log(data.feed.entry);
           for (i = 0; i < 8; i++) { 
               var proj_name = 'gsx$projectname' + String( i + 1 );
               initColumn.addColumn(data.feed.entry[2][proj_name],
@@ -66,6 +67,7 @@ Columns = function(){
     this.columnArray = [];
     
     this.addColumn = function(tab_one, tab_two, tab_three, tab_four, new_title, pic, content){
+    	
     	var json_obj = { position: {tab_1: tab_one['$t'], tab_2: tab_two['$t'], tab_3: tab_three['$t'], tab_4: tab_four['$t']}, title: new_title['$t'], image: pic['$t'], text: content['$t']};
         this.columnArray.push(json_obj);
     };
