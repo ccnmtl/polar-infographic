@@ -73,6 +73,7 @@ Columns = function(){
     };
     
     this.init();
+    //this.reorderColumns(0, 1);
 }//end Columns
 
 jQuery(document).ready(function() {
