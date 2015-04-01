@@ -9,8 +9,6 @@ div.tab-pane > div.pane-header > h4 {
 	display: inline;
 }
 
-/* The first header element (<h2>) horizontal
- bar in the top of each tab pane */
 div.tab-pane > div.pane-header > h4:first-child {
 	float: left;
 }
