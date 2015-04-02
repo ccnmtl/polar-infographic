@@ -18,6 +18,9 @@ div.tab-pane > div.pane-header > h4:nth-child(2) {
 }
 
 
+/* Background colors for top bar gradients in tab pane */
+
+
 /* Moving on to the pane itself and the columns it contains
  (although the pane-header divs are technically in the panes too) */
  div.tab-pane > div.pane-container {
@@ -37,29 +40,24 @@ div.tab-pane > div.pane-header > h4:nth-child(2) {
 div.column {
    margin: 0;
    float: left;
-   min-height: 100px;
+   height: 100%;
    overflow: auto;
 }
 
 
 /* Elements Inside the Columns */
+/* I was assuming that these percentages were in relation to
+ its immediate parent but that doesn't seem to be accurate... */
 
 div.column > div.column-title {
+	height:20%;
     font-weight: bold; 
 }
 
-/* cdiv.column > div.column-pic {
-	width:10px;
-	height:10px;
-	border-radius:5px;
-	font-size:10px;
-	color:#fff;
-	line-height:100px;
-	text-align:center;
-	background:#000;
-} */
+div.column > div.pic-container {
+	height:20%;
+}
 
-/*  display: inline;} div.tab-pane > div.pane-container >  */
-
-div.column-pic {display: inline;}
-div.column-content {display: inline;} */
+div.column > div.column-content {
+	height:60%;
+}
