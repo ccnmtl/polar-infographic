@@ -1,37 +1,65 @@
+/* handle elements above columns first */
 div.tab-pane {
 	width: 100em;
 }
-div.container {
-    width: 80em;
+
+/* The horizontal bar in the top
+ of each tab pane, has 2 h4 child elements  */
+div.tab-pane > div.pane-header > h4 {
+	display: inline;
+}
+
+div.tab-pane > div.pane-header > h4:first-child {
+	float: left;
+}
+
+div.tab-pane > div.pane-header > h4:nth-child(2) {
+	float: right;
+}
+
+
+/* Moving on to the pane itself and the columns it contains
+ (although the pane-header divs are technically in the panes too) */
+ div.tab-pane > div.pane-container {
+    width: 100%;
+    margin: 0 auto;
+   
     -webkit-column-count: 8; /* Chrome, Safari, Opera */
     -moz-column-count: 8; /* Firefox */
     column-count: 8;
-    column-rule: 1em outset coral;
-    column-rule-style: solid;
-    column-fill: auto;
+	
+    -webkit-column-width: 12.5%; /* Chrome, Safari, Opera */
+    -moz-column-width: 12.5%; /* Firefox */
+    column-width: 12.5%;
 }
 
-div.container div.column {
-    display: inline;
-    width:10em;
-    margin-left:0;
-    margin-right:0;
-    background-color: #FF00FF;
-    column-span: 1;
+
+div.column {
+   margin: 0;
+   float: left;
+   min-height: 100px;
+   overflow: auto;
 }
 
-div.container div.column h4 {
-    display: inline;
-    text-align:center;
-    column-span: 1;
+
+/* Elements Inside the Columns */
+
+div.column > div.column-title {
+    font-weight: bold; 
 }
 
-div.column-title,
-div.column-pic,
-div.column-content {
+/* cdiv.column > div.column-pic {
+	width:10px;
+	height:10px;
+	border-radius:5px;
+	font-size:10px;
+	color:#fff;
+	line-height:100px;
 	text-align:center;
-    column-span: 1;
-}
-.polar-explorer.tab-content{
-    display: none;
-}
+	background:#000;
+} */
+
+/*  display: inline;} div.tab-pane > div.pane-container >  */
+
+div.column-pic {display: inline;}
+div.column-content {display: inline;} */
