@@ -68,20 +68,12 @@ Columns = function(){
             var cp = " div.column-pic";
             var cc = " div.column-content";
             var link = " div.column-link";
-            //console.log(link);
-            //console.log(exp + link);
-            //console.log(this.columnArray[i]['link']);
             jQuery(exp + ct).text(this.columnArray[i]['title']);
             jQuery(exp + cp).text(this.columnArray[i]['image']);
             jQuery(exp + cc).text(this.columnArray[i]['text']);
             var nl = String(this.columnArray[i]['link']);
-            //console.log(nl);
             jQuery(exp + link).text(this.columnArray[i]['link']);
             jQuery(exp + link).data().link = this.columnArray[i]['link'];
-            //jQuery(exp + link).data("link", {"link": String(this.columnArray[i]['link'])});
-            //jQuery(exp + link).data().link.value = String(this.columnArray[i]['link']);
-            //console.log(exp + link);
-            //jQuery(exp + link).data().link = String(this.columnArray[i]['link']);
         }
 
     };
@@ -104,16 +96,11 @@ jQuery(document).ready(function() {
    window.initColumn = new Columns(); 
    
 	jQuery('.column').on('click', jQuery('div.column-link'), function(event) {
-		//console.log(event);
-		//console.log(event.data);
-		//console.log(event.delegateTarget);
-		var link =jQuery(this).children('div.column-link').data().link;  
+		var link = jQuery(this).children('div.column-link').data().link;  
 		//window.location.href = '/course_details/' + this.model.get('id')  + '/';  
 		document.location = link;
-		//console.log(event.data);
         //window.open("../../media/" + this.model.get('link'));
-		//event.delegateTarget.find('.column-link'));
-		//console.log($(this));
+
 	});
    
 });
