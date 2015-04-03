@@ -24,6 +24,8 @@ Columns = function(){
                 var current_tab_num = jQuery('.nav-tabs .active').data().tabNum;
                 var current_pane = ".tab-" + String(current_tab_num) + "-pane";
                 var next_tab_num = parseInt(current_tab_num) + 1;
+                
+                
 
                 if (next_tab_num === 5)
                 {
@@ -32,7 +34,10 @@ Columns = function(){
             
                 var next_tab = ".tab-" + String(next_tab_num);
                 var next_pane = ".tab-" + String(next_tab_num) + "-pane";
-            
+
+            	if(jQuery('.column:hover').length){
+                    return;
+            	}
                 initColumn.reorderColumns(next_tab, next_tab_num);
                 jQuery(current_tab).toggleClass("active");
                 jQuery(current_pane).toggleClass("active");
@@ -47,7 +52,11 @@ Columns = function(){
     };
 
     this.reorderColumns = function(active_tab, active_num){
-
+        
+    	if(jQuery('.column:hover').length){
+            return;
+    	}
+    	
         for (i = 0; i < this.columnArray.length; i++) { 
         	var tab_num = 'tab_' + String(active_num);
         	var tab_pane = 'div#tab-' + String(active_num) + '-container';
