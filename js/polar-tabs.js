@@ -6,15 +6,18 @@ Columns = function(){
 
           for (i = 0; i < 8; i++) { 
               var proj_name = 'gsx$projectname' + String( i + 1 );
-
-              initColumn.addColumn(data.feed.entry[2][proj_name],
-                                   data.feed.entry[3][proj_name],
+              
+              initColumn.addColumn(data.feed.entry[3][proj_name],
                                    data.feed.entry[4][proj_name],
                                    data.feed.entry[5][proj_name],
+                                   data.feed.entry[6][proj_name],
                                    data.feed.entry[0][proj_name],
                                    data.feed.entry[1][proj_name],
-                                   data.feed.entry[0][proj_name]);
+                                   data.feed.entry[0][proj_name],
+                                   data.feed.entry[7][proj_name]);
+              
           }
+
         }).always(function()
         {
             initColumn.reorderColumns(0, 1);
@@ -24,8 +27,6 @@ Columns = function(){
                 var current_tab_num = jQuery('.nav-tabs .active').data().tabNum;
                 var current_pane = ".tab-" + String(current_tab_num) + "-pane";
                 var next_tab_num = parseInt(current_tab_num) + 1;
-                
-                
 
                 if (next_tab_num === 5)
                 {
@@ -66,26 +67,53 @@ Columns = function(){
             var ct = " div.column-title";
             var cp = " div.column-pic";
             var cc = " div.column-content";
+            var link = " div.column-link";
+            //console.log(link);
+            //console.log(exp + link);
+            //console.log(this.columnArray[i]['link']);
             jQuery(exp + ct).text(this.columnArray[i]['title']);
             jQuery(exp + cp).text(this.columnArray[i]['image']);
             jQuery(exp + cc).text(this.columnArray[i]['text']);
+            var nl = String(this.columnArray[i]['link']);
+            //console.log(nl);
+            jQuery(exp + link).text(this.columnArray[i]['link']);
+            jQuery(exp + link).data().link = this.columnArray[i]['link'];
+            //jQuery(exp + link).data("link", {"link": String(this.columnArray[i]['link'])});
+            //jQuery(exp + link).data().link.value = String(this.columnArray[i]['link']);
+            //console.log(exp + link);
+            //jQuery(exp + link).data().link = String(this.columnArray[i]['link']);
         }
 
     };
 
     this.columnArray = [];
     
-    this.addColumn = function(tab_one, tab_two, tab_three, tab_four, new_title, pic, content){
+    this.addColumn = function(tab_one, tab_two, tab_three, tab_four, new_title, pic, content, link){
     	
-    	var json_obj = { position: {tab_1: tab_one['$t'], tab_2: tab_two['$t'], tab_3: tab_three['$t'], tab_4: tab_four['$t']}, title: new_title['$t'], image: pic['$t'], text: content['$t']};
-        this.columnArray.push(json_obj);
+    	var json_obj = { position: {tab_1: tab_one['$t'], tab_2: tab_two['$t'], tab_3: tab_three['$t'], tab_4: tab_four['$t']}, title: new_title['$t'], image: pic['$t'], text: content['$t'], link: link['$t']};
+    	this.columnArray.push(json_obj);
+    	
     };
-    
     
     this.init();
 
 }//end Columns
 
 jQuery(document).ready(function() {
+
    window.initColumn = new Columns(); 
+   
+	jQuery('.column').on('click', jQuery('div.column-link'), function(event) {
+		//console.log(event);
+		//console.log(event.data);
+		//console.log(event.delegateTarget);
+		var link =jQuery(this).children('div.column-link').data().link;  
+		//window.location.href = '/course_details/' + this.model.get('id')  + '/';  
+		document.location = link;
+		//console.log(event.data);
+        //window.open("../../media/" + this.model.get('link'));
+		//event.delegateTarget.find('.column-link'));
+		//console.log($(this));
+	});
+   
 });
