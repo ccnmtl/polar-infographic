@@ -104,10 +104,20 @@ jQuery(document).ready(function() {
    
 	jQuery('.column').on('click', jQuery('div.column-link'), function(event) {
 		var link = jQuery(this).children('div.column-link').data().link;  
-		//window.location.href = '/course_details/' + this.model.get('id')  + '/';  
 		document.location = link;
-        //window.open("../../media/" + this.model.get('link'));
-
 	});
+	
+	jQuery('.tree-graph-nav li').on('hover', jQuery('.tree-graph-nav li'), function(event) {
+		var act_tab = jQuery('.tree-graph-nav li.active');
+		var act_pane = jQuery('div.polar-explorer div.tab-pane.active');
+		act_tab.removeClass('active');
+		act_pane.removeClass('active');
+		jQuery(this).addClass("active");
+		var num = jQuery(this).data('tabNum');
+        var pane = '.tab-' + String(num) + '-pane';
+        jQuery(pane).addClass("active");
+	});
+	
+
    
 });
