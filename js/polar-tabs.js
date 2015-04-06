@@ -22,7 +22,7 @@ Columns = function(){
         {
             initColumn.reorderColumns(0, 1);
             initColumn.showColumns();
-            window.setInterval(function() {
+            timer = window.setInterval(function() {
                 var current_tab = jQuery('.nav-tabs .active');
                 var current_tab_num = jQuery('.nav-tabs .active').data().tabNum;
                 var current_pane = ".tab-" + String(current_tab_num) + "-pane";
@@ -118,6 +118,17 @@ jQuery(document).ready(function() {
         jQuery(pane).addClass("active");
 	});
 	
-
+	
+	jQuery('.tree-graph-nav li').on('hover', jQuery('.tree-graph-nav li'), function(event) {
+		var act_tab = jQuery('.tree-graph-nav li.active');
+		var act_pane = jQuery('div.polar-explorer div.tab-pane.active');
+		act_tab.removeClass('active');
+		act_pane.removeClass('active');
+		jQuery(this).addClass("active");
+		var num = jQuery(this).data('tabNum');
+        var pane = '.tab-' + String(num) + '-pane';
+        jQuery(pane).addClass("active");
+        window.clearInterval(timer);
+	});
    
 });
