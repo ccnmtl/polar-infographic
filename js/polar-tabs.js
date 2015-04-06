@@ -39,6 +39,10 @@ Columns = function(){
             	if(jQuery('.column:hover').length){
                     return;
             	}
+            	if(jQuery('.tree-graph-nav li:hover').length){
+                    return;
+            	}
+
                 initColumn.reorderColumns(next_tab, next_tab_num);
                 jQuery(current_tab).toggleClass("active");
                 jQuery(current_pane).toggleClass("active");
@@ -57,7 +61,10 @@ Columns = function(){
     	if(jQuery('.column:hover').length){
             return;
     	}
-    	
+    	if(jQuery('.tree-graph-nav li:hover').length){
+            return;
+    	}
+
         for (i = 0; i < this.columnArray.length; i++) { 
         	var tab_num = 'tab_' + String(active_num);
         	var tab_pane = 'div#tab-' + String(active_num) + '-container';
