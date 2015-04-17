@@ -1,134 +1,164 @@
-Columns = function(){
-    this.init = function(){
+Columns = function() {
+    this.init = function() {
+      //arguable how you realy want to set instatiated properties here...
+      this.columnArray = [];
+      this.slideTime = 5000;
+      // There is only one. Make it accessible to the data coming in.
+      window.polarColumns = this;
 
-        url = 'https://spreadsheets.google.com/feeds/list/1rqeGy7IU7wHK5QPUzanPXr85VGwPVwa2-kmUh2is43o/od6/public/values?alt=json';
-        jQuery.getJSON(url, function(data) {
-
-          for (i = 0; i < 8; i++) { 
-              var proj_name = 'gsx$projectname' + String( i + 1 );
-              
-              initColumn.addColumn(data.feed.entry[3][proj_name],
-                                   data.feed.entry[4][proj_name],
-                                   data.feed.entry[5][proj_name],
-                                   data.feed.entry[6][proj_name],
-                                   data.feed.entry[0][proj_name],
-                                   data.feed.entry[1][proj_name],
-                                   data.feed.entry[0][proj_name],
-                                   data.feed.entry[7][proj_name]);
-              
-          }
-
-        }).always(function()
-        {
-            initColumn.reorderColumns(0, 1);
-            initColumn.showColumns();
-            timer = window.setInterval(function() {
-                var current_tab = jQuery('.nav-tabs .active');
-                var current_tab_num = jQuery('.nav-tabs .active').data().tabNum;
-                var current_pane = ".tab-" + String(current_tab_num) + "-pane";
-                var next_tab_num = parseInt(current_tab_num) + 1;
-
-                if (next_tab_num === 5)
-                {
-                    next_tab_num = 1;
-                }
-            
-                var next_tab = ".tab-" + String(next_tab_num);
-                var next_pane = ".tab-" + String(next_tab_num) + "-pane";
-
-            	if(jQuery('.column:hover').length){
-                    return;
-            	}
-            	if(jQuery('.tree-graph-nav li:hover').length){
-                    return;
-            	}
-
-                initColumn.reorderColumns(next_tab, next_tab_num);
-                jQuery(current_tab).toggleClass("active");
-                jQuery(current_pane).toggleClass("active");
-                jQuery(next_tab).toggleClass("active");
-                jQuery(next_pane).toggleClass("active");
-          }, 2000);
-      });//end of get json always
-    };
-
-     this.showColumns = function(){
-      jQuery('.polar-explorer.tab-content').show();
-    };
-
-    this.reorderColumns = function(active_tab, active_num){
+      url = 'https://spreadsheets.google.com/feeds/list/1rqeGy7IU7wHK5QPUzanPXr85VGwPVwa2-kmUh2is43o/od6/public/values?alt=json';
+      jQuery.getJSON(url, function(data) {
+        polarColumns.entries = data.feed.entry;
+        for (i = 0; i < polarColumns.entries.length; i++) { 
+          var projData = polarColumns.entries[i];
+          var columnData = {
+            'tabOne': projData.gsx$tab1order.$t,
+            'tabTwo': projData.gsx$tab2order.$t,
+            'tabThree': projData.gsx$tab3order.$t,
+            'tabFour': projData.gsx$tab4order.$t,
+            'newTitle': projData.gsx$projectname.$t,
+            'pic': projData.gsx$imagelink.$t,
+            'content': projData.gsx$projectdescription.$t,
+            'link': projData.gsx$projectpagelink.$t
+          };
+          
+          polarColumns.addColumn(columnData);
         
-    	if(jQuery('.column:hover').length){
-            return;
-    	}
-    	if(jQuery('.tree-graph-nav li:hover').length){
-            return;
-    	}
+        };
+      }).complete(function() {
+        // need to actually load the template html with 
+        // the data we returned from spreadsheet
+        polarColumns.loadHtmlContent();
+        polarColumns.showColumns();
+        window.setInterval(function() {
+            // let's do this first so we don't waste any time/memory
+            if(jQuery('#infographic-container:hover').length){
+                  return;
+            };
 
-        for (i = 0; i < this.columnArray.length; i++) { 
-        	var tab_num = 'tab_' + String(active_num);
-        	var tab_pane = 'div#tab-' + String(active_num) + '-container';
-        	var current_column_order = this.columnArray[i]['position'][tab_num];
-            var column_num = ' div.column-' + String(current_column_order);
-            var exp = String(tab_pane + column_num);
-            var ct = " div.column-title";
-            var cp = " div.column-pic";
-            var cc = " div.column-content";
-            var link = " div.column-link";
-            jQuery(exp + ct).text(this.columnArray[i]['title']);
-            jQuery(exp + cp).text(this.columnArray[i]['image']);
-            jQuery(exp + cc).text(this.columnArray[i]['text']);
-            var nl = String(this.columnArray[i]['link']);
-            jQuery(exp + link).text(this.columnArray[i]['link']);
-            jQuery(exp + link).data().link = this.columnArray[i]['link'];
-        }
+            var currentTab = jQuery('.nav-tabs .active');
+            var currentTabNum = jQuery('.nav-tabs .active').data().tabNum;
+            var current_pane = ".tab-" + String(currentTabNum) + "-pane";
+            var parseTabNum = parseInt(currentTabNum) + 1;
+            var nextTabNum = (parseTabNum === 5) ? 1 : parseTabNum;
+            var nextTab = ".tab-" + String(nextTabNum);
+            var nextPane = ".tab-" + String(nextTabNum) + "-pane";
+      
+            polarColumns.reorderColumns(nextTab, nextTabNum);
+            jQuery(currentTab).toggleClass("active");
+            jQuery(current_pane).toggleClass("active");
+            jQuery(nextTab).toggleClass("active");
+            jQuery(nextPane).toggleClass("active");
+        }, polarColumns.slideTime);
+      }).error(function() {
+        alert('We are sorry. Something happened with loading the Partner Matrix. Please reload this page to try loading again.');
+      });
+    };
+
+     this.showColumns = function() {
+      jQuery('#infographic-container').show();
+    };
+
+    this.loadHtmlContent = function() {
+      this.setTitles();
+      this.setSubTitles();
+      this.reorderColumns(0, 1);
+      this.reorderColumns(1, 2);
+      this.reorderColumns(2, 3);
+      this.reorderColumns(3, 4);
+      this.reorderColumns(5, 0);
+    };
+
+    this.reorderColumns = function(active_tab, active_num) {
+      //create columns
+      for (i = 0; i < this.columnArray.length; i++) { 
+        var tabNum = 'tab_' + String(active_num);
+        var tabPane = 'div#tab-' + String(active_num) + '-container';
+        var currentColumnOrder = this.columnArray[i]['position'][tabNum];
+        var column_num = ' div.column-' + String(currentColumnOrder);
+        var exp = String(tabPane + column_num);
+        var ct = " div.column-title";
+        var cp = " div.column-pic";
+        var cc = " div.column-content";
+        var link = " div.column-link";
+
+        jQuery(exp + ct).text(this.columnArray[i]['title']);
+        jQuery(exp + cp).children().remove();
+        jQuery(exp + cp).append('<img src="' + this.columnArray[i]['image'] + '"/>');
+        jQuery(exp + cc).text(this.columnArray[i]['text']);
+        jQuery(exp + link).text(this.columnArray[i]['link']);
+        jQuery(exp + link).attr('data-link',this.columnArray[i]['link']);
+        
+        // set click handler to open new window on clicked column  
+        jQuery(tabPane).find('.partner-column').click(function(event){
+          var link = jQuery(this).children('div.column-link').data().link;
+          window.open(link, '_self');
+        });
+      };// end .click
+    };
+
+    this.setTitles = function(){
+      //need to hardcode the retrival for these
+      tabOneTitle = polarColumns.entries[0].gsx$tab1title.$t;
+      tabTwoTitle = polarColumns.entries[0].gsx$tab2title.$t;
+      tabThreeTitle = polarColumns.entries[0].gsx$tab3title.$t;
+      tabFourTitle = polarColumns.entries[0].gsx$tab4title.$t;
+      jQuery('#tab-1-title').text(tabOneTitle);
+      jQuery('#tab-2-title').text(tabTwoTitle);
+      jQuery('#tab-3-title').text(tabThreeTitle);
+      jQuery('#tab-4-title').text(tabFourTitle);
+      jQuery('#tab01').children('a').text(tabOneTitle);
+      jQuery('#tab02').children('a').text(tabTwoTitle);
+      jQuery('#tab03').children('a').text(tabThreeTitle);
+      jQuery('#tab04').children('a').text(tabFourTitle);
 
     };
 
-    this.columnArray = [];
-    
-    this.addColumn = function(tab_one, tab_two, tab_three, tab_four, new_title, pic, content, link){
-    	
-    	var json_obj = { position: {tab_1: tab_one['$t'], tab_2: tab_two['$t'], tab_3: tab_three['$t'], tab_4: tab_four['$t']}, title: new_title['$t'], image: pic['$t'], text: content['$t'], link: link['$t']};
-    	this.columnArray.push(json_obj);
-    	
+    this.setSubTitles = function(){
+      //need to hardcode the retrival for these
+      var subTitleOneLeft = polarColumns.entries[0].gsx$tab1subtitles.$t;
+      var subTitleOneRight = polarColumns.entries[1].gsx$tab1subtitles.$t;
+      var subTitleTwoLeft = polarColumns.entries[0].gsx$tab2subtitles.$t;
+      var subTitleTwoRight = polarColumns.entries[1].gsx$tab2subtitles.$t;
+      var subTitleThreeLeft = polarColumns.entries[0].gsx$tab3subtitles.$t;
+      var subTitleThreeRight = polarColumns.entries[1].gsx$tab3subtitles.$t;
+      var subTitleFourLeft = polarColumns.entries[0].gsx$tab4subtitles.$t;
+      var subTitleFourRight = polarColumns.entries[1].gsx$tab4subtitles.$t;
+      jQuery('#subtitle-1-left').text(subTitleOneLeft);
+      jQuery('#subtitle-1-right').text(subTitleOneRight);
+      jQuery('#subtitle-2-left').text(subTitleTwoLeft);
+      jQuery('#subtitle-2-right').text(subTitleTwoRight);
+      jQuery('#subtitle-3-left').text(subTitleThreeLeft);
+      jQuery('#subtitle-3-right').text(subTitleThreeRight);
+      jQuery('#subtitle-4-left').text(subTitleFourLeft);
+      jQuery('#subtitle-4-right').text(subTitleFourRight);
+
+    };
+
+    this.addColumn = function(columnData) {
+      // format the json so it is readable
+      var jsonObj = {
+        position: {
+          tab_1: columnData.tabOne, 
+          tab_2: columnData.tabTwo,
+          tab_3: columnData.tabThree,
+          tab_4: columnData.tabFour
+        },
+        title: columnData.newTitle,
+        image: columnData.pic,
+        text: columnData.content,
+        link: columnData.link
+      };
+      
+      this.columnArray.push(jsonObj);
+      
     };
     
+    // init thy self.
     this.init();
 
 }//end Columns
 
 jQuery(document).ready(function() {
-
-   window.initColumn = new Columns(); 
-   
-	jQuery('.column').on('click', jQuery('div.column-link'), function(event) {
-		var link = jQuery(this).children('div.column-link').data().link;  
-		document.location = link;
-	});
-	
-	jQuery('.tree-graph-nav li').on('hover', jQuery('.tree-graph-nav li'), function(event) {
-		var act_tab = jQuery('.tree-graph-nav li.active');
-		var act_pane = jQuery('div.polar-explorer div.tab-pane.active');
-		act_tab.removeClass('active');
-		act_pane.removeClass('active');
-		jQuery(this).addClass("active");
-		var num = jQuery(this).data('tabNum');
-        var pane = '.tab-' + String(num) + '-pane';
-        jQuery(pane).addClass("active");
-	});
-	
-	
-	jQuery('.tree-graph-nav li').on('hover', jQuery('.tree-graph-nav li'), function(event) {
-		var act_tab = jQuery('.tree-graph-nav li.active');
-		var act_pane = jQuery('div.polar-explorer div.tab-pane.active');
-		act_tab.removeClass('active');
-		act_pane.removeClass('active');
-		jQuery(this).addClass("active");
-		var num = jQuery(this).data('tabNum');
-        var pane = '.tab-' + String(num) + '-pane';
-        jQuery(pane).addClass("active");
-        window.clearInterval(timer);
-	});
-   
+   polarColumns = new Columns(); 
 });

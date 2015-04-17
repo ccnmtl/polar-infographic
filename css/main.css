@@ -1,63 +1,361 @@
-/* handle elements above columns first */
-div.tab-pane {
-	width: 100em;
+#nav-container {
+margin: 0px auto;
+width: 960px;
 }
 
-/* The horizontal bar in the top
- of each tab pane, has 2 h4 child elements  */
-div.tab-pane > div.pane-header > h4 {
-	display: inline;
+ul.nav
+{
+  margin: 0;
+  border: 0;
+  
 }
 
-div.tab-pane > div.pane-header > h4:first-child {
-	float: left;
+li.tab { width: 17em; text-align: center; margin: 0px;}
+
+li.active a {}
+li#tab01.active a {background-color: #625179; color: #fff;}
+li#tab02.active a {background-color: #97c1ad; color: #fff;}
+li#tab03.active a {background-color: #29ace7; color: #fff;}
+li#tab04.active a {background-color: #3a579b; color: #fff;}
+
+li.tab a
+{
+  font-weight: bold;
+  font-size: 1.25em;
+    -webkit-border-radius: 5px 5px 0 0 !important;
+    -moz-border-radius: 5px 5px 0 0 !important;
+    border-radius: 5px 5px 0 0 !important;
+    border: 0 !important;
 }
 
-div.tab-pane > div.pane-header > h4:nth-child(2) {
-	float: right;
+.tab-pane
+{
+  padding-bottom: 1em;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+#tab-one-pane {
+background: #efedf1; /* Old browsers */
+background: -moz-linear-gradient(left,  #efedf1 0%, #625179 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,#efedf1), color-stop(100%,#625179)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left,  #efedf1 0%,#625179 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left,  #efedf1 0%,#625179 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(left,  #efedf1 0%,#625179 100%); /* IE10+ */
+background: linear-gradient(to right,  #efedf1 0%,#625179 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efedf1', endColorstr='#625179',GradientType=1 ); /* IE6-9 */
+}
+
+#tab-two-pane {
+background: #f4f9f7; /* Old browsers */
+background: -moz-linear-gradient(left,  #f4f9f7 0%, #625179 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,#f4f9f7), color-stop(100%,#97c1ad)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left,  #f4f9f7 0%,#97c1ad 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left,  #f4f9f7 0%,#97c1ad 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(left,  #f4f9f7 0%,#97c1ad 100%); /* IE10+ */
+background: linear-gradient(to right,  #f4f9f7 0%,#97c1ad 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f9f7', endColorstr='#97c1ad',GradientType=1 ); /* IE6-9 */
+}
+
+#tab-three-pane {
+background: #eaf7fc; /* Old browsers */
+background: -moz-linear-gradient(left,  #eaf7fc 0%, #29ace7 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,#eaf7fc), color-stop(100%,#29ace7)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left,  #eaf7fc 0%,#29ace7 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left,  #eaf7fc 0%,#29ace7 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(left,  #eaf7fc 0%,#29ace7 100%); /* IE10+ */
+background: linear-gradient(to right,  #eaf7fc 0%,#29ace7 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaf7fc', endColorstr='#29ace7',GradientType=1 ); /* IE6-9 */
+}
+
+#tab-four-pane {
+background: #ebeef5; /* Old browsers */
+background: -moz-linear-gradient(left,  #ebeef5 0%, #3a579b 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ebeef5), color-stop(100%,#3a579b)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left,  #ebeef5 0%,#3a579b 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left,  #ebeef5 0%,#3a579b 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(left,  #ebeef5 0%,#3a579b 100%); /* IE10+ */
+background: linear-gradient(to right,  #ebeef5 0%,#3a579b 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebeef5', endColorstr='#3a579b',GradientType=1 ); /* IE6-9 */
+}
+
+#arrow {
+background: #ffffff; /* Old browsers */
+background: -moz-linear-gradient(left,  #ffffff 0%, #000000 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ffffff), color-stop(100%,#000000)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left,  #ffffff 0%,#000000 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left,  #ffffff 0%,#000000 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(left,  #ffffff 0%,#000000 100%); /* IE10+ */
+background: linear-gradient(to right,  #ffffff 0%,#000000 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=1 ); /* IE6-9 */
+height: 1.5em;
+margin: 1.5em 1em 0em 1em;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+opacity: 0.2;
+filter: alpha(opacity=2); /* For IE8 and earlier */
 }
 
 
-/* Background colors for top bar gradients in tab pane */
 
+p img {display: none;}
+.pane-header { }
+.pane-header-min {display: none;}
+.pane-header arrow-label
+{
+  display: inline;
+  margin: 0;
+  padding: 1em;
+  font-size: 1em;
+}
 
-/* Moving on to the pane itself and the columns it contains
- (although the pane-header divs are technically in the panes too) */
- div.tab-pane > div.pane-container {
-    width: 100%;
-    margin: 0 auto;
-   
-    -webkit-column-count: 8; /* Chrome, Safari, Opera */
-    -moz-column-count: 8; /* Firefox */
-    column-count: 8;
-	
-    -webkit-column-width: 12.5%; /* Chrome, Safari, Opera */
-    -moz-column-width: 12.5%; /* Firefox */
-    column-width: 12.5%;
+.arrow-symbol {display: none;
+}
+.span12 {position: relative; margin-bottom: 1.2em;}
+.span12 .arrow-label { position: absolute; margin: 1em; padding: .5em .5em .25em .5em; -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+.span12 .arrow-label-left
+{
+  left: 0px;
+  top: 0px;
+  color: black;
+}
+
+.span12 .arrow-label-right
+{
+  right: 0px;
+  top: 0px;
+  /*color: white;*/
+  color: black;
+}
+
+.span6-left
+{
+  padding-left: 1em;
+  margin-right: -1em;
+}
+
+.span6-right { margin-left: -.5em; }
+
+.span3
+{
+  padding: 1em;
+  min-height: 22em !important;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.span3.column-1
+{
+background-color: rgba(255, 255, 255, .1);
+}
+.span3.column-2
+{
+background-color: rgba(218, 218, 218, .1);
+}
+.span3.column-3
+{
+background-color: rgba(182, 182, 182, .1);
+}
+.span3.column-4
+{
+background-color: rgba(145, 145, 145, .1);
+}
+.span3.column-5
+{
+background-color: rgba(109, 109, 109, .1);
+}
+.span3.column-6
+{
+background-color: rgba(72, 72, 72, .1);
+}
+.span3.column-7
+{
+background-color: rgba(36, 36, 36, .1);
+}
+.span3.column-8
+{
+background-color: rgba(0, 0, 0, .1);
 }
 
 
-div.column {
-   margin: 0;
-   float: left;
-   height: 100%;
-   overflow: auto;
+
+
+.span3:hover { background-color: #fff; }
+
+.column-title, .column-title-test { font-weight: bold;}
+
+.column-pic img, .column-pic-test img  {height: 7em !important; width: 7em !important; border-radius: 50% !important;}
+
+.column-content, .column-content-test {height: 160px;}
+
+.column-link, .column-link-test {display: none;}
+
+
+
+/* start - tablet 1 */
+@media (max-width: 1199px) {
+#nav-container
+{
+  margin: 0px auto;
+  width: 790px;
+}
+
+li.tab { width: 14em; text-align: center; margin: 0px; font-size: 1em;}
+
+.span3
+{
+  min-height: 32em !important;
+}
+
+.column-pic img, .column-pic-test img  {height: 5em !important; width: 5em !important; border-radius: 50% !important;}
+
+
 }
 
 
-/* Elements Inside the Columns */
-/* I was assuming that these percentages were in relation to
- its immediate parent but that doesn't seem to be accurate... */
+/* stop - tablet 1*/
 
-div.column > div.column-title {
-	height:20%;
-    font-weight: bold; 
+
+
+/* start - tablet 2 */
+@media (max-width: 979px)
+{
+#nav-container
+{
+  margin: 0px auto;
+  width: 640px;
 }
 
-div.column > div.pic-container {
-	height:20%;
+li.tab { width: 14em; text-align: center; margin: 0px; font-size: .8em;}
+
+.span3 { min-height: 10em !important; font-size: .9em; line-height: 1.2em;}
+
+.column-pic img, .column-pic-test img  {height: 4em !important; width: 4em !important; border-radius: 50% !important;}
+
+
 }
 
-div.column > div.column-content {
-	height:60%;
+
+/* stop - tablet 2 */
+
+
+
+
+
+/* start - mobile */
+@media (max-width: 767px)
+{
+
+
+#nav-container
+{
+  margin: 0px auto;
+  width: 100%;
+  margin-bottom: 1em;
 }
+
+li.tab
+{
+  display: block;
+  width: 100%;
+  
+}
+
+li.active a
+{
+  -webkit-border-radius: 5px !important;
+  -moz-border-radius: 5px !important;
+  border-radius: 5px !important;
+}
+
+.pane-header {display: none;}
+.pane-header-min {display: block; padding: 1em 0 1em 0; font-weight: bold; font-weight: 1.2em;}
+.pane-header-min-label {padding: .5em; background-color: #000; color: #fff;
+  -webkit-border-radius: 5px !important;
+  -moz-border-radius: 5px !important;
+  border-radius: 5px !important;
+
+}
+.pane-header-min-label-top {
+background-color: #fff; 
+color: #000;
+}
+.pane-header-min-label-bottom {
+background-color: #000; 
+color: #fff;
+}
+
+.span6-left, .span6-right
+{
+  margin: -2em 0 0 0; padding: 1em;
+}
+
+.span3 { min-height: 5em !important; margin-top: 1em; }
+
+#tab-one-pane {
+background: #efedf1; /* Old browsers */
+background: -moz-linear-gradient(top,  #efedf1 0%, #625179 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, top, bottom, color-stop(0%,#efedf1), color-stop(100%,#625179)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #efedf1 0%,#625179 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #efedf1 0%,#625179 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #efedf1 0%,#625179 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #efedf1 0%,#625179 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efedf1', endColorstr='#625179',GradientType=1 ); /* IE6-9 */
+}
+
+#tab-two-pane {
+background: #f4f9f7; /* Old browsers */
+background: -moz-linear-gradient(top,  #f4f9f7 0%, #625179 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, top, bottom, color-stop(0%,#f4f9f7), color-stop(100%,#97c1ad)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #f4f9f7 0%,#97c1ad 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #f4f9f7 0%,#97c1ad 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #f4f9f7 0%,#97c1ad 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #f4f9f7 0%,#97c1ad 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f9f7', endColorstr='#97c1ad',GradientType=1 ); /* IE6-9 */
+}
+
+#tab-three-pane {
+background: #eaf7fc; /* Old browsers */
+background: -moz-linear-gradient(top,  #eaf7fc 0%, #29ace7 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, top, bottom, color-stop(0%,#eaf7fc), color-stop(100%,#29ace7)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #eaf7fc 0%,#29ace7 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #eaf7fc 0%,#29ace7 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #eaf7fc 0%,#29ace7 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #eaf7fc 0%,#29ace7 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaf7fc', endColorstr='#29ace7',GradientType=1 ); /* IE6-9 */
+}
+
+#tab-four-pane {
+background: #ebeef5; /* Old browsers */
+background: -moz-linear-gradient(top,  #ebeef5 0%, #3a579b 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, top, bottom, color-stop(0%,#ebeef5), color-stop(100%,#3a579b)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #ebeef5 0%,#3a579b 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #ebeef5 0%,#3a579b 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #ebeef5 0%,#3a579b 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #ebeef5 0%,#3a579b 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebeef5', endColorstr='#3a579b',GradientType=1 ); /* IE6-9 */
+}
+
+.span12 .arrow-label { 
+padding: 0 .5em .25em .5em; -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+#arrow {
+height: 3.5em;
+}
+
+.column-pic img, .column-pic-test img  {height: 15em !important; width: 15em !important; border-radius: 50% !important;}
+
+
+}
+/* stop - mobile */
